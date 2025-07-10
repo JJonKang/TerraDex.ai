@@ -1,6 +1,9 @@
-import {Button} from './components/Button';
+import { Routes, Route, Link } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
+
+import Home from './pages/Home';
+import Login from './pages/Login';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -11,15 +14,17 @@ function App() {
       .then((data) => setMessage(data.message));
   }, []);
 
-  const handleClick = () => {
-    const randomNumber = Math.floor(Math.random() * 100);
-    alert(`Random number: ${randomNumber}`);
-  }
   return (
     <div>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/login">Login</Link>
+      </nav>
       <h1>{message}</h1>
-      <Button onClick = {handleClick} label = "Generate random Number" />
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </div>
   );
 }
 
